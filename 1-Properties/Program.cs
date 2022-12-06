@@ -46,7 +46,7 @@ namespace Properties
 
             Console.WriteLine("The {1} deck has {0} cards: ", df.DeckSize, "italian");
 
-            foreach (Card c in df.GetDeck())
+            foreach (Card c in df.Deck)
             {
                 Console.WriteLine(c);
             }
