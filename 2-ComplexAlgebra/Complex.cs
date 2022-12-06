@@ -24,7 +24,24 @@ namespace ComplexAlgebra
 
         public double Modulus => Math.Sqrt(Math.Pow(Real, 2) + Math.Pow(Imaginary, 2));
 
-        public double Phase =>  Math.Pow(Math.Tan(Imaginary), -1) / Real;
+        public double Phase 
+        {
+            get
+            {
+                if (Imaginary != 0 && Real > 0) 
+                {
+                    return (2 * (1/(Math.Tan(Imaginary/((Math.Sqrt(Real * Real + Imaginary * Imaginary)) + Real)))));
+                }
+                if (Real < 0 && Imaginary == 0)
+                {
+                    return Math.PI;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public Complex Complement => new Complex(Real, -Imaginary);
 
@@ -42,5 +59,9 @@ namespace ComplexAlgebra
             Real = real;
             Imaginary = imaginary;
         }
+
+        public override bool Equals(object obj) => obj is Complex c && Real == c.Real && c.Imaginary == Imaginary;
+
+        public override int GetHashCode() => HashCode.Combine(Real,Imaginary);
     }
 }
