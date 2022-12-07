@@ -26,28 +26,14 @@ namespace ComplexAlgebra
 
         public double Phase 
         {
-            get
-            {
-                if (Imaginary != 0 && Real > 0) 
-                {
-                    return (2 * (1/(Math.Tan(Imaginary/((Math.Sqrt(Real * Real + Imaginary * Imaginary)) + Real)))));
-                }
-                if (Real < 0 && Imaginary == 0)
-                {
-                    return Math.PI;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
+            get => Math.Atan2(Imaginary, Real);
         }
 
         public Complex Complement => new Complex(Real, -Imaginary);
 
         public override string ToString()
         {
-            return $"Z = {Real} + i{Imaginary}";
+            return $"{(Real == 0 && Imaginary == 0 ? 0 : (Real != 0 ? Real : String.Empty))} {(Imaginary == 0 ? String.Empty : (Imaginary < 0 ? '-' : '+'))} {(Math.Abs(Imaginary) == 1 ? "i" : (Imaginary == 0 ? String.Empty : $"{Math.Abs(Imaginary)}i"))}";
         }
 
         public static Complex operator +(Complex n1, Complex n2) => new Complex(n1.Real + n2.Real, n1.Imaginary + n2.Imaginary);
